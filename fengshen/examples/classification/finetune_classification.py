@@ -16,7 +16,7 @@
 from dataclasses import dataclass
 from fengshen.models.megatron_t5 import T5EncoderModel
 from fengshen.models.roformer import RoFormerModel
-from fengshen.models.longformer import LongformerModel
+from fengshen.models.longformer import LongformerModel,LongformerForSequenceClassification
 # from fengshen.models.cocolm.modeling_cocolm import COCOLMForSequenceClassification
 import numpy as np
 import os
@@ -45,7 +45,7 @@ model_dict = {'huggingface-bert': BertModel,
               'fengshen-roformer': RoFormerModel,
               'huggingface-megatron_bert': MegatronBertModel,
               'fengshen-megatron_t5': T5EncoderModel,
-              'fengshen-longformer': LongformerModel,
+              'fengshen-longformer': LongformerForSequenceClassification,#LongformerModel,
               # 'fengshen-zen1': ZenModel,
               'huggingface-auto': AutoModelForSequenceClassification,
               }
