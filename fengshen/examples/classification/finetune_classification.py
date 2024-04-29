@@ -310,7 +310,7 @@ class TaskModelCheckpoint:
         parser.add_argument('--save_top_k', default=3, type=float)
         parser.add_argument('--every_n_train_steps', default=100, type=float)
         parser.add_argument('--save_weights_only', default=True, type=bool)
-
+        parser.add_argument('--every_n_epochs', default=None, type=int)
         return parent_args
 
     def __init__(self, args):
@@ -320,7 +320,7 @@ class TaskModelCheckpoint:
                                          every_n_train_steps=args.every_n_train_steps,
                                          save_weights_only=args.save_weights_only,
                                          dirpath=args.dirpath,
-                                         every_n_epochs=1,
+                                         every_n_epochs=args.every_n_epochs,
                                          filename=args.filename)
 
 

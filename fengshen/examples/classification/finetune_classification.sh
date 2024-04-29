@@ -7,17 +7,20 @@
 #SBATCH --gres=gpu:1 # number of gpus per node
 #SBATCH --mail-type=ALL # send email when job begins, ends or failed etc. 
 
+script_dir="$(cd "$(dirname "$0")" && pwd)"
 
+# 进入脚本所在的目录
+cd "$script_dir"
 
-MODEL_TYPE=fengshen-roformer
-PRETRAINED_MODEL_PATH=IDEA-CCNL/Zhouwenwang-Unified-110M
+MODEL_TYPE=huggingface-megatron_bert
+PRETRAINED_MODEL_PATH=IDEA-CCNL/Erlangshen-MegatronBert-1.3B
 
 ROOT_PATH=cognitive_comp
 TASK=tnews
 
-DATA_DIR=/$ROOT_PATH/yangping/data/ChineseCLUE_DATA/${TASK}_public/
-CHECKPOINT_PATH=/$ROOT_PATH/yangping/checkpoints/modelevaluation/tnews/
-OUTPUT_PATH=/$ROOT_PATH/yangping/nlp/modelevaluation/output/predict.json
+DATA_DIR=/$script_dir/tnews_public/
+CHECKPOINT_PATH=/$script_dir/checkpoints/tnews/
+OUTPUT_PATH=/$script_dir/output/predict.json
 
 DATA_ARGS="\
         --data_dir $DATA_DIR \
@@ -67,8 +70,8 @@ options=" \
         $TRAINER_ARGS \
         "
 
-DOCKER_PATH=/$ROOT_PATH/yangping/containers/pytorch21_06_py3_docker_image.sif
-SCRIPT_PATH=/$ROOT_PATH/yangping/nlp/Fengshenbang-LM/fengshen/examples/classification/finetune_classification.py
+# DOCKER_PATH=/$ROOT_PATH/yangping/containers/pytorch21_06_py3_docker_image.sif
+SCRIPT_PATH=/$script_dir/finetune_classification.py
 
 python3 $SCRIPT_PATH $options
 # singularity exec --nv -B /cognitive_comp/:/cognitive_comp/ $DOCKER_PATH python3 $SCRIPT_PATH $options
