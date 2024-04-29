@@ -242,7 +242,7 @@ class LitModel(pl.LightningModule):
         self.args = args
         self.num_data = num_data
         self.model = model_dict[args.model_type].from_pretrained(
-            args.pretrained_model_path)
+            args.pretrained_model_path,num_labels=args.num_labels)
         self.save_hyperparameters(args)
 
     def setup(self, stage) -> None:
@@ -263,7 +263,9 @@ class LitModel(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         del batch['id']
         output = self.model(**batch)
-        loss, logits = output[0], output[1]
+        # loss, logits = output[0], output[1]
+        loss = output.loss
+        logits = output.logits
         acc = self.comput_metrix(logits, batch['labels'])
         self.log('train_loss', loss)
         self.log('train_acc', acc)

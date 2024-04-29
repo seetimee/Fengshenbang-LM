@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 *torch_extendsions/
 __pycache__/
+.idea/
 *.py[cod]
 *$py.class
 tnews_public/
