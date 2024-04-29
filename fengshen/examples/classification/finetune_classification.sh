@@ -26,7 +26,7 @@ DATA_ARGS="\
         --data_dir $DATA_DIR \
         --train_data train.json \
         --valid_data dev.json \
-        --test_data test1.1.json \
+        --test_data test1.0.json \
         --train_batchsize 32 \
         --valid_batchsize 128 \
         --max_length 128 \
