@@ -3,7 +3,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+tnews_public/
 # C extensions
 *.so
 
